@@ -1,0 +1,108 @@
+---
+title: "dev"
+bibliography: Rodger.bib
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{dev}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(rodgercontrasts)
+```
+
+# Computing $F[E\alpha]$ values
+
+From @rodgerNUMBERNONZEROPOST1975
+
+Reproduce example from pg 77
+
+```{r}
+
+v1 <- 2
+v2 <- 12
+f_crit <- qf(.95,v1,v2)
+
+test_f <- f_crit
+
+alpha <- .05
+step <- .001
+save_f <- c()
+for(i in 1:10000){
+  E_alpha <- sum(diff(c(pf(test_f*(0:v1),v1,v2),1)) * (0:v1)) / v1
+  if(round(E_alpha,digits=5) == alpha) {
+    print(i)
+    break
+  }
+  alpha_diff <- abs(E_alpha-alpha)
+  if(E_alpha < alpha) test_f <- test_f - alpha_diff
+  if(E_alpha >= alpha) test_f <- test_f + alpha_diff
+  save_f[i] <- test_f
+}
+
+test_f
+
+```
+
+## write function
+
+```{r}
+
+f_e_alpha <- function(v1,v2,alpha) {
+  
+  #start with critical f
+  f_crit <- qf(.95,v1,v2)
+  
+  test_f <- f_crit
+  
+  for(i in 1:10000){
+    E_alpha <- sum(diff(c(pf(test_f*(0:v1),v1,v2),1)) * (0:v1)) / v1
+    if(round(E_alpha,digits=6) == alpha) {
+      #print(i)
+      break
+    }
+    alpha_diff <- abs(E_alpha-alpha)
+    if(E_alpha < alpha) test_f <- test_f - alpha_diff
+    if(E_alpha >= alpha) test_f <- test_f + alpha_diff
+  }
+
+  return(round(test_f, digits=3))
+  
+}
+
+f_e_alpha(2,12,.05)
+f_e_alpha(2,12,.01)
+
+```
+
+## Reproduce table 1
+
+```{r}
+
+v1s <- c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,30,40,50,60)
+v2s <- c(4,6,8,10,12,14,16,18,20,22,24,26,28,30,40,50,60)
+
+table_1 <- matrix(0,nrow=length(v2s),ncol=length(v1s))
+for(i in 1:length(v2s)){
+  for(j in 1:length(v1s)){
+        table_1[i,j] <- f_e_alpha(v1s[j],v2s[i],.05)
+  }
+}
+
+row.names(table_1) <- v2s
+colnames(table_1) <- v1s
+
+knitr::kable(table_1)
+
+```
+
+
+
