@@ -1,0 +1,47 @@
+# see https://pkgdown.r-lib.org/articles/pkgdown.html for yml help
+url: https://crumplab.com/rodgercontrasts
+
+template:
+  bootstrap: 5
+  opengraph:
+    twitter:
+      creator: "@MattCrumpLab"
+      site: "@MattCrumpLab"
+      card: summary
+
+development:
+  mode: unreleased
+
+authors:
+  Matthew Crump:
+    href: "https://crumplab.github.io"
+
+toc:
+  depth: 2
+
+pkgdown:
+  as_is: true
+
+navbar:
+  structure:
+    left:
+    - intro
+    - reference
+    - articles
+    - tutorials
+    - news
+    right: github
+  components:
+    reference:
+      text: Reference
+      href: reference/index.html
+    articles:
+      text: Articles
+      menu:
+      - text: Rodger critical values
+        href: articles/Critical_values.html
+    github:
+      icon: fa-lg fa-github
+      href: https://github.com/CrumpLab/rodgercontrasts
+
+
