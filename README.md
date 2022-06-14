@@ -18,10 +18,10 @@ devtools::install_github("CrumpLab/rodgercontrasts")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+Find Rodger's critical F for post-hoc mutually orthogonal linear contrasts.
 
 ``` r
 library(rodgercontrasts)
-## basic example code
+f_e_alpha(v1 = 2, v2 = 12, alpha = .05)
 ```
 
