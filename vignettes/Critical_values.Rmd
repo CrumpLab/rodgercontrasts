@@ -1,9 +1,9 @@
 ---
-title: "dev"
+title: "Rodger critical values"
 bibliography: Rodger.bib
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{dev}
+  %\VignetteIndexEntry{Rodger critical values}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

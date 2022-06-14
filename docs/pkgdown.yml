@@ -2,6 +2,6 @@ pandoc: 2.17.1.1
 pkgdown: 2.0.3
 pkgdown_sha: ~
 articles:
-  dev: dev.html
-last_built: 2022-06-14T14:36Z
+  Critical_values: Critical_values.html
+last_built: 2022-06-14T14:49Z
 
